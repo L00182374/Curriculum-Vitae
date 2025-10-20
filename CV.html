@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV</title>
+  <link rel="icon" type="image/x-icon" href="https://static.wikia.nocookie.net/balatrogame/images/e/ef/Joker.png/revision/latest/smart/width/250/height/250?cb=20250619163211">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    html { scroll-padding-top: 72px; }
+    body { scroll-behavior: smooth; }
+    section { padding: 80px 0; }
+    .navbar { background: #1082ce; }
+    .navbar-brand, .nav-link { color: #fff !important; }
+    .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; overflow: hidden; }
+    #shaderCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .hero-content { position: relative; z-index: 1; }
+    .project-card { cursor: pointer; transition: transform .15s ease; }
+    .project-card:hover { transform: translateY(-6px); background: #f5f5f5; }
+    .card-btn { text-align: left; width: 100%; background: none; border: none; padding: 0; }
+    .tab-pane .card { overflow: visible; }
+    .carousel-inner img { object-fit: cover; height: 350px; width: 100%; }
+    @media (max-width: 768px) {
+      .carousel-inner img { height: 200px; }
+    }
+
+    .tab {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .tab button {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      padding: 0.75rem 1rem;
+      min-width: 220px;
+      text-align: left;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .tab button:hover { transform: translateY(-4px); }
+    .tab button.active {
+      border-color: #0d6efd;
+      box-shadow: 0 8px 24px rgba(13,110,253,0.12);
+      background: linear-gradient(180deg, #fff, #f8fbff);
+    }
+    .tab button img { width: 84px; height: 52px; object-fit: cover; border-radius: 6px; }
+
+    /* content panels */
+    .tabcontent { display: none; margin-top: 1.25rem; }
+    .tabcontent.active { display: block; animation: fadeIn .28s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .tabcontent .carousel-inner img { object-fit: cover; height: 360px; width: 100%; }
+    @media (max-width: 768px) { .tabcontent .carousel-inner img { height: 220px; } }
+
+    #projects .container { position: relative; }
+
+    #CVdiv {
+      text-align: center;
+      margin: auto;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">My CV</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">Technologies</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Languages</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <!--li class="nav-item"><a class="nav-link" href="#contact">Contact maybe add gpa or grades</a></li-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="shaderCanvas"></canvas>
+  <div class="hero-content" data-aos="fade-up">
+    <h1></h1>
+    <p class="lead">Aspiring Developer | Open-Source Enthusiast</p>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center">
+      <div id = CVdiv class="col-md-6" data-aos="fade-right">
+        
+        <!--iframe src="CV.pdf" width="100%" height="820px" title="CV"></iframe-->
+
+
+        <h2 data-aos="zoom-in">Technologies</h2>
+        <div class="row mt-4">
+        <div class="col-md-4" data-aos="flip-left">
+          <h4>Django</h4>
+          <p>Web Development</p>
+        </div>
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+          <h4>MySQL</h4>
+          <p>Linking a database to java</p>
+        </div>
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="400">
+          <h4>Godot, Unity</h4>
+          <p>2D & 3D Game Development</p>
+        </div>
+  
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="600">
+          <h4>Git</h4>
+          <p>Version Control</p>
+        </div>
+  
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="800">
+          <h4>WireShark</h4>
+          <p>Traffic Analysis</p>
+        </div>
+
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="1000">
+          <h4>Blender</h4>
+          <p>3D Modelling</p>
+        </div>
+
+      </div>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="bg-light">
+  <div class="container text-center">
+    <h2 data-aos="zoom-in">Languages</h2>
+    <div class="row mt-4">
+      <div class="col-md-4" data-aos="flip-left">
+        <h4>Java</h4>
+        <p>Object-oriented programming and package design</p>
+      </div>
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+        <h4>Python</h4>
+        <p>Computer vision, data analysis, and scripting</p>
+      </div>
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="400">
+        <h4>C#,GDscript</h4>
+        <p>2D & 3D game development with physics</p>
+      </div>
+
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="600">
+        <h4>SQL</h4>
+        <p>Database design</p>
+      </div>
+
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="800">
+        <h4>HTML,CSS,JavaScript</h4>
+        <p>Full stack web development</p>
+      </div>
+
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="1000">
+        <h4>R</h4>
+        <p>Data Analytics</p>
+      </div>
+
+      
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Projects: button-driven tab system ===== -->
+<section id="projects">
+  <div class="container">
+    <h2 class="text-center" data-aos="fade-up">Projects</h2>
+
+    <!-- tab buttons -->
+    <div class="tab" role="tablist" aria-label="Project tabs" data-aos="fade-up">
+      <button class="tablinks" role="tab" aria-controls="Proj1" id="tab-proj1"
+              onclick="openProjectTab(event,'Proj1')">
+        <img src="https://yt3.googleusercontent.com/N8lGREv8SGZXwhGOPd0eKyIc6X3cK67YCU2P1mld4vkVKu99izKfjwKfD4dHBDS7-LfpBXHUOA=s900-c-k-c0x00ffffff-no-rj" alt="">
+        <div>
+          <strong>Shatter Hazard</strong>
+          <div class="small text-muted"></div>
+        </div>
+      </button>
+
+      <button class="tablinks" role="tab" aria-controls="Proj2" id="tab-proj2"
+              onclick="openProjectTab(event,'Proj2')">
+        <img src="https://thumbs.dreamstime.com/b/psyche-large-metallic-asteroid-ideal-space-mining-image-elements-furnished-nasa-psyche-asteroid-space-202100488.jpg" alt="">
+        <div>
+          <strong>Meteoroids</strong>
+          <div class="small text-muted"></div>
+        </div>
+      </button>
+
+      <button class="tablinks" role="tab" aria-controls="Proj3" id="tab-proj3"
+              onclick="openProjectTab(event,'Proj3')">
+        <img src="https://preview.redd.it/qh5vak4f92y81.jpg?width=1280&format=pjpg&auto=webp&s=671ecb935d8b124b104189176c23525d0d285e66" alt="">
+        <div>
+          <strong>Godot Pachinko</strong>
+          <div class="small text-muted"></div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Tab content panels -->
+    <div id="Proj1" class="tabcontent" role="tabpanel" aria-labelledby="tab-proj1" data-aos="fade-up">
+      <div class="card shadow-sm">
+        <div class="row g-0">
+          <div class="col-lg-7">
+            <div id="carouselProj1" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div>
+                  <iframe frameborder="0" src="https://itch.io/embed-upload/15298712?color=333333" allowfullscreen="" width="640" height="380"><a href="https://cicerolock.itch.io/shatter-hazard">Play Shatter hazard on itch.io</a></iframe>
+                </div>
+                
+              </div>
+              <!--button class="carousel-control-prev" type="button" data-bs-target="#carouselProj1" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" visibility: hidden></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselProj1" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" visibility: hidden></span>
+              </button-->
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card-body">
+              <h3>Shatter Hazard</h3>
+              <p class="small text-muted">My first 3D game. It was made using the Godot game engine. It's a Blackjack game I made in a week for the brackeys game jam 2025.</p>
+              <p class="mb-0"><strong>Technologies:</strong> Godot, GDscript, Blender</p>
+              <div class="mt-3">
+                <a class="btn btn-outline-primary btn-sm" href="https://cicerolock.itch.io" target="_blank" rel="noopener">Full itch.io page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Proj2" class="tabcontent" role="tabpanel" aria-labelledby="tab-proj2" data-aos="fade-up">
+      <div class="card shadow-sm">
+        <div class="row g-0">
+          <div class="col-lg-7">
+            <div id="carouselProj2" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <iframe frameborder="0" src="https://itch.io/embed-upload/15298734?color=333333" allowfullscreen="" width="640" height="380"><a href="https://cicerolock.itch.io/meteoroids">Play Meteoroids on itch.io</a></iframe>
+              </div>
+              <!--button class="carousel-control-prev" type="button" data-bs-target="#carouselProj2" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" visibility: hidden></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselProj2" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" visibility: hidden></span>
+              </button-->
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card-body">
+              <h3>Meteoroids</h3>
+              <p class="small text-muted">An asteroids clone I made in godot.</p>
+              <p class="mb-0"><strong>Technologies:</strong> Godot, GDscript</p>
+              <div class="mt-3">
+                <a class="btn btn-outline-primary btn-sm" href="https://cicerolock.itch.io" target="_blank" rel="noopener">Full itch.io page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Proj3" class="tabcontent" role="tabpanel" aria-labelledby="tab-proj3" data-aos="fade-up">
+      <div class="card shadow-sm">
+        <div class="row g-0">
+          <div class="col-lg-7">
+            <div id="carouselProj3" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <iframe frameborder="0" src="https://itch.io/embed-upload/15298722?color=333333" allowfullscreen="" width="640" height="380"><a href="https://cicerolock.itch.io/pachinkira">Play Pachinkira on itch.io</a></iframe>
+              </div>
+              <!--button class="carousel-control-prev" type="button" data-bs-target="#carouselProj3" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" visibility: hidden></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselProj3" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" visibility: hidden></span>
+              </button-->
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card-body">
+              <h3>Pachinko</h3>
+              <p class="small text-muted">A Pachinko like game I made in a few hours for jamsepticeye. The theme of the game jam was death is an opportunity</p>
+              <p class="mb-0"><strong>Technologies:</strong> Godot, GDscript</p>
+              <div class="mt-3">
+                <a class="btn btn-outline-primary btn-sm" href="https://cicerolock.itch.io" target="_blank" rel="noopener">Full itch.io page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ===== end Projects ===== -->
+
+<section id="contact" class="bg-light">
+  <div class="container text-center">
+    <h2 data-aos="fade-up"></h2>
+    <p data-aos="fade-up" data-aos-delay="200"></p>
+    <p data-aos="fade-up" data-aos-delay="400"></p>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script> AOS.init({ duration: 1000, once: true }); </script>
+
+<!-- shader (unchanged) -->
+<script>
+  (() => {
+    const canvas = document.getElementById('shaderCanvas');
+    if (!canvas) {
+      console.warn('No canvas with id "shaderCanvas" found.');
+      return;
+    }
+    const gl = canvas.getContext('webgl');
+    if (!gl) {
+      console.warn('WebGL not supported');
+      return;
+    }
+  
+    // --- Vertex shader (full-screen quad) ---
+    const vsSource = `
+      attribute vec2 a_position;
+      void main() {
+        gl_Position = vec4(a_position, 0.0, 1.0);
+      }
+    `;
+  
+    // --- Fragment shader: multiple rounded cubes + glow ---
+    const fsSource = `
+      precision mediump float;
+      uniform float u_time;
+      uniform vec2 u_resolution;
+      uniform vec2 u_mouse; // in pixels, origin top-left
+  
+      const int MAX_MARCH = 80;
+      const float EPS = 0.001;
+      const float MAX_DIST = 12.0;
+  
+      // rotate around Y axis
+      mat3 rotY(float a) {
+        float c = cos(a), s = sin(a);
+        return mat3(
+          c, 0.0, s,
+          0.0, 1.0, 0.0,
+         -s, 0.0, c
+        );
+      }
+  
+      // rotate around X axis
+      mat3 rotX(float a) {
+        float c = cos(a), s = sin(a);
+        return mat3(
+          1.0, 0.0, 0.0,
+          0.0, c, -s,
+          0.0, s, c
+        );
+      }
+  
+      // rounded box SDF
+      float sdRoundedBox(vec3 p, vec3 b, float r) {
+        vec3 q = abs(p) - b;
+        return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - r;
+      }
+  
+      // scene SDF: multiple rotating cubes and a "glow" metric
+      // returns distance; sets id (which primitive is nearest) and G (min glow distance)
+      float sceneSDF(vec3 p, out float id, out float G) {
+        G = 1e5;
+        float d = 1e5;
+        id = -1.0;
+  
+        // animate base rotations
+        float t = u_time;
+  
+        // cube 0
+        {
+          vec3 pos = vec3(-1.2, 0.1 + 0.15*sin(t*0.9), 0.0);
+          vec3 q = p - pos;
+          mat3 R = rotY(t*0.6) * rotX(t*0.37);
+          q = R * q;
+          float di = sdRoundedBox(q, vec3(0.6,0.6,0.6)*0.7, 0.08);
+          float glowShell = abs(length(q) - 0.8);
+          if (di < d) { d = di; id = 0.0; }
+          G = min(G, glowShell);
+        }
+  
+        // cube 1
+        {
+          vec3 pos = vec3(1.0, -0.15 + 0.12*cos(t*1.1), -0.4);
+          vec3 q = p - pos;
+          mat3 R = rotY(-t*0.45) * rotX(t*0.23);
+          q = R * q;
+          float di = sdRoundedBox(q, vec3(0.5,0.55,0.45), 0.07);
+          float glowShell = abs(length(q) - 0.75);
+          if (di < d) { d = di; id = 1.0; }
+          G = min(G, glowShell);
+        }
+  
+        // cube 2
+        {
+          vec3 pos = vec3(0.0, 0.7 + 0.05*sin(t*1.7), -0.8);
+          vec3 q = p - pos;
+          mat3 R = rotY(t*1.1) * rotX(-t*0.15);
+          q = R * q;
+          float di = sdRoundedBox(q, vec3(0.4,0.4,0.4), 0.06);
+          float glowShell = abs(length(q) - 0.7);
+          if (di < d) { d = di; id = 2.0; }
+          G = min(G, glowShell);
+        }
+  
+        // ground plane (nice fallback floor)
+        {
+          float planeD = p.y + 1.2; // plane at y = -1.2
+          float glowShell = abs(p.y + 1.2);
+          if (planeD < d) { d = planeD; id = 3.0; }
+          G = min(G, glowShell);
+        }
+  
+        return d;
+      }
+  
+      // estimate normal via central differences
+      vec3 estimateNormal(vec3 p) {
+        float h = EPS;
+        float id; float G;
+        float dx = sceneSDF(p + vec3(h,0,0), id, G) - sceneSDF(p - vec3(h,0,0), id, G);
+        float dy = sceneSDF(p + vec3(0,h,0), id, G) - sceneSDF(p - vec3(0,h,0), id, G);
+        float dz = sceneSDF(p + vec3(0,0,h), id, G) - sceneSDF(p - vec3(0,0,h), id, G);
+        return normalize(vec3(dx, dy, dz));
+      }
+  
+      // palette for cubes
+      vec3 palette(float idx) {
+        if (idx < 0.5) return vec3(0.7,0.3,1.0);   // purple
+        if (idx < 1.5) return vec3(0.2,0.9,0.6);   // teal/green
+        if (idx < 2.5) return vec3(1.0,0.6,0.2);   // orange
+        return vec3(0.2,0.25,0.35);               // floor dark
+      }
+  
+      void main() {
+        vec2 uv = (gl_FragCoord.xy) / u_resolution.xy;
+        vec2 pxy = uv * 2.0 - 1.0;
+        pxy.x *= u_resolution.x / u_resolution.y;
+  
+        // camera setup
+        vec3 ro = vec3(0.0, 0.0, -3.0); // camera origin
+        // use mouse to slightly tilt camera (if mouse at center, no tilt)
+        vec2 mm = u_mouse / u_resolution;
+        vec2 mouseNorm = (mm - 0.5) * 2.0;
+        ro.x += mouseNorm.x * 0.6;
+        ro.y += mouseNorm.y * 0.4;
+  
+        vec3 rd = normalize(vec3(pxy.x, pxy.y, 1.6)); // ray direction
+  
+        // rotate camera slowly around Y for nicer motion
+        float camAngle = 0.08 * u_time;
+        mat3 camRot = rotY(camAngle);
+        ro = camRot * ro;
+        rd = camRot * rd;
+  
+        // Raymarch
+        float t = 0.0;
+        float glowClosest = 1e5;
+        float hitId = -1.0;
+        float dist = 1e5;
+        for (int i = 0; i < MAX_MARCH; i++) {
+          vec3 pos = ro + rd * t;
+          float id; float G;
+          float d = sceneSDF(pos, id, G);
+          glowClosest = min(glowClosest, G);
+          dist = d;
+          hitId = id;
+          t += d;
+          if (d < EPS || t > MAX_DIST) break;
+        }
+  
+        vec3 col = vec3(0.02, 0.03, 0.06) * 1.6; // background
+        if (dist < EPS && t < MAX_DIST) {
+          // hit something
+          vec3 hitPos = ro + rd * t;
+          vec3 N = estimateNormal(hitPos);
+  
+          // light: one directional + ambient; directional influenced by mouse
+          vec3 lightDir = normalize(vec3(-0.5 + mouseNorm.x*0.8, 0.6 + mouseNorm.y*0.2, -0.8));
+          float diff = clamp(dot(N, lightDir), 0.0, 1.0);
+  
+          // specular
+          vec3 V = normalize(-rd);
+          vec3 H = normalize(V + lightDir);
+          float spec = pow(max(dot(N, H), 0.0), 32.0);
+  
+          // base color from palette
+          vec3 base = palette(hitId);
+  
+          // rim lighting
+          float rim = pow(1.0 - max(dot(N, V), 0.0), 2.0);
+  
+          // final shaded color
+          col = base * (0.12 + 1.2 * diff) + vec3(1.0) * spec * 0.8 + 0.5 * rim * base;
+        }
+  
+        // volumetric glow contribution from glowClosest (smaller G => stronger glow)
+        float glow = exp(-glowClosest * 6.0); // tune multiplier for size
+        // Add some soft bloom by sampling along ray a little (cheap)
+        float soft = exp(-t * 0.6) * 0.4;
+        vec3 glowCol = vec3(0.2, 0.45, 1.0) * (glow * 2.0 + soft);
+  
+        // composite
+        vec3 finalCol = col + glowCol;
+  
+        // simple tonemapping + gamma
+        finalCol = finalCol / (finalCol + vec3(1.0));
+        finalCol = pow(finalCol, vec3(0.4545));
+  
+        gl_FragColor = vec4(finalCol, 1.0);
+      }
+    `;
+  
+    function compileShader(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error('Shader compile error:', gl.getShaderInfoLog(s));
+        console.error(src.split('\n').map((l, i) => (i+1)+': '+l).join('\n'));
+        return null;
+      }
+      return s;
+    }
+  
+    const vert = compileShader(gl.VERTEX_SHADER, vsSource);
+    const frag = compileShader(gl.FRAGMENT_SHADER, fsSource);
+    if (!vert || !frag) return;
+  
+    const program = gl.createProgram();
+    gl.attachShader(program, vert);
+    gl.attachShader(program, frag);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Program link error:', gl.getProgramInfoLog(program));
+      return;
+    }
+    gl.useProgram(program);
+  
+    // full screen quad
+    const quad = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,
+       1, -1,
+      -1,  1,
+       1,  1
+    ]), gl.STATIC_DRAW);
+  
+    const posLoc = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+  
+    // uniforms
+    const uTime = gl.getUniformLocation(program, 'u_time');
+    const uResolution = gl.getUniformLocation(program, 'u_resolution');
+    const uMouse = gl.getUniformLocation(program, 'u_mouse');
+  
+    // DPI-aware resize: make canvas fill its CSS size (assumes canvas styled to fill hero)
+    function resizeCanvasToDisplaySize() {
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      // make canvas fill parent element
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(rect.width * dpr));
+      const height = Math.max(1, Math.floor(rect.height * dpr));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+  
+    // ensure canvas element CSS fills its container (do once)
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+  
+    // mouse
+    let mouse = [canvas.width / 2, canvas.height / 2];
+    function updateMouse(e) {
+      const r = canvas.getBoundingClientRect();
+      const x = (e.clientX - r.left);
+      const y = (e.clientY - r.top);
+      mouse = [x, y];
+    }
+    window.addEventListener('mousemove', updateMouse, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) updateMouse(e.touches[0]);
+    }, { passive: true });
+  
+    // animation loop
+    let start = performance.now();
+    function render(now) {
+      resizeCanvasToDisplaySize();
+      const t = (now - start) * 0.001;
+  
+      gl.uniform1f(uTime, t);
+      gl.uniform2f(uResolution, canvas.width, canvas.height);
+      gl.uniform2f(uMouse, mouse[0] * (window.devicePixelRatio || 1), mouse[1] * (window.devicePixelRatio || 1));
+  
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  })();
+  </script>
+  
+
+<!-- smooth-scroll / restore / tab integration (PASTABLE) -->
+<script>
+  // Prevent browser restoring scroll on history navigation/reload
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  // Smooth scroll helper that respects the fixed navbar height
+  function scrollPanelIntoViewWithOffset(panel, extra = 12) {
+    if (!panel) return;
+    const nav = document.querySelector('.navbar');
+    const navHeight = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
+    const rect = panel.getBoundingClientRect();
+    const targetY = window.pageYOffset + rect.top - navHeight - extra;
+    window.scrollTo({ top: Math.max(0, Math.round(targetY)), behavior: 'smooth' });
+  }
+
+  // Tab behavior for the button-driven tabs
+  // evt may be null when called programmatically; options.skipScroll prevents scrolling
+  function openProjectTab(evt, projectId, options = {}) {
+    const skipScroll = !!options.skipScroll;
+
+    // hide all panels, remove active state on buttons
+    document.querySelectorAll('.tabcontent').forEach(tc => tc.classList.remove('active'));
+    document.querySelectorAll('.tab button').forEach(b => b.classList.remove('active'));
+
+    // show selected panel
+    const panel = document.getElementById(projectId);
+    if (panel) panel.classList.add('active');
+
+    // determine button (either from evt or by aria-controls)
+    let btn = null;
+    if (evt && evt.currentTarget) btn = evt.currentTarget;
+    if (!btn) btn = document.querySelector(`.tab button[aria-controls="${projectId}"]`) || document.getElementById(`tab-${projectId.toLowerCase()}`);
+
+    if (btn) btn.classList.add('active');
+
+    // reset bootstrap carousel in the panel (start from first slide)
+    const car = panel ? panel.querySelector('.carousel') : null;
+    if (car) {
+      try {
+        const bsCarousel = bootstrap.Carousel.getInstance(car) || new bootstrap.Carousel(car, { interval: 4000 });
+        bsCarousel.to(0);
+      } catch (e) {
+        // ignore carousel errors
+      }
+    }
+
+    // scroll into view AFTER a short delay to allow layout/AOS to settle,
+    // unless skipScroll is true (used at initial load)
+    if (!skipScroll) {
+      setTimeout(() => scrollPanelIntoViewWithOffset(panel, 150), 120);
+    }
+  }
+
+  // Open first tab on DOM ready but skip scrolling (so reload always stays at top)
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstBtn = document.querySelector('.tab button');
+    const firstPanelId = firstBtn ? (firstBtn.getAttribute('aria-controls') || 'Proj1') : 'Proj1';
+    openProjectTab(null, firstPanelId, { skipScroll: true });
+
+    // keyboard accessibility for tab buttons
+    document.querySelectorAll('.tab button').forEach(btn => {
+      btn.setAttribute('tabindex', '0');
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
