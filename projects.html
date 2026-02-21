@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#071423;
+      --bg2:#0b2540;
+      --accent:#1082ce;
+      --bubble:#0f2c45cc;
+      --bubbleBorder:#2b79b8aa;
+      --text:#e9f3ff;
+      --muted:#b9d8f5;
+    }
+
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      background: radial-gradient(1200px 700px at 50% 40%, #0d2b47 0%, var(--bg1) 55%, #040b12 100%);
+      overflow:hidden; /* bubbles float, no page scroll */
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* top bar */
+    .topbar{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 18px;
+      z-index:5;
+      background: linear-gradient(180deg, rgba(7,20,35,0.85), rgba(7,20,35,0.35));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(43,121,184,0.25);
+    }
+    .topbar .brand{
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .topbar a{
+      color: var(--text);
+      text-decoration:none;
+      opacity:.9;
+    }
+    .topbar a:hover{ opacity:1; text-decoration:underline; }
+
+    /* stage */
+    #stage{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+
+    /* center glow */
+    .center-glow{
+      position:absolute;
+      left:50%; top:50%;
+      transform:translate(-50%,-50%);
+      width:min(780px, 90vw);
+      height:min(520px, 65vh);
+      background: radial-gradient(circle at 50% 50%, rgba(16,130,206,0.22), rgba(16,130,206,0.08) 35%, transparent 70%);
+      filter: blur(0px);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* bubble */
+    .bubble{
+      position:absolute;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: var(--bubble);
+      border: 1px solid var(--bubbleBorder);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+      cursor:pointer;
+      user-select:none;
+      transform: translate(-50%, -50%);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      z-index:1;
+      max-width: min(340px, 80vw);
+    }
+    .bubble:hover{
+      box-shadow: 0 18px 46px rgba(0,0,0,0.38);
+      border-color: rgba(16,130,206,0.55);
+    }
+
+    .bubble .icon{
+      width:42px; height:42px;
+      border-radius:12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+    }
+    .bubble .icon img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .bubble .initials{
+      font-weight:800;
+      color: var(--muted);
+      letter-spacing:.6px;
+      font-size: 14px;
+    }
+
+    .bubble .name{
+      font-weight:650;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 240px;
+    }
+    .bubble .meta{
+      font-size:12px;
+      color: rgba(185,216,245,0.85);
+      margin-top:2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 240px;
+    }
+    .bubble .text{
+      min-width: 0; /* enable ellipsis */
+    }
+
+    /* footer hint */
+    .hint{
+      position:fixed;
+      left:50%;
+      bottom:14px;
+      transform:translateX(-50%);
+      color: rgba(185,216,245,0.8);
+      font-size: 12px;
+      z-index:5;
+      background: rgba(7,20,35,0.35);
+      border: 1px solid rgba(43,121,184,0.18);
+      padding: 8px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* loading */
+    .status{
+      position:fixed;
+      left:50%;
+      top:88px;
+      transform:translateX(-50%);
+      z-index:6;
+      color: rgba(233,243,255,0.92);
+      font-size: 13px;
+      background: rgba(7,20,35,0.55);
+      border: 1px solid rgba(43,121,184,0.22);
+      padding: 8px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 480px){
+      .bubble .name, .bubble .meta { max-width: 170px; }
+      .bubble { padding: 9px 12px; }
+      .bubble .icon { width: 38px; height: 38px; border-radius: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">Projects</div>
+    <div class="d-flex gap-3 align-items-center">
+      <a href="./index.html">Back to CV</a>
+      <a href="https://github.com/L00182374" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <div id="stage">
+    <div class="center-glow"></div>
+  </div>
+
+  <div id="status" class="status">Loading repos…</div>
+  <div class="hint">Drag bubbles : Click to open repo</div>
+
+<script>
+(() => {
+  const USERNAME = "L00182374"; 
+  const stage = document.getElementById("stage");
+  const statusEl = document.getElementById("status");
+
+  // ---------- GitHub fetching ----------
+  async function fetchAllRepos(username) {
+    const perPage = 100;
+    let page = 1;
+    let all = [];
+    for (;;) {
+      const url = `https://api.github.com/users/${username}/repos?per_page=${perPage}&page=${page}&sort=updated`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to fetch repos");
+      const batch = await res.json();
+      all = all.concat(batch);
+      if (batch.length < perPage) break;
+      page++;
+    }
+    // show all public repos; optional cleanup:
+    return all
+      .filter(r => !r.archived)          // I can remove this if I want archived too
+      .sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at));
+  }
+
+  // Social preview image is often present OpenGraph. GitHub serves it at:
+  // https://opengraph.githubassets.com/<hash>/<owner>/<repo>
+  // Hash can be anything; GitHub generates a valid image.
+  function socialPreviewURL(owner, repo) {
+    return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
+  }
+
+  // Best effort: try common icon filenames in the repo root.
+  async function tryCommonIcons(owner, repoName, defaultBranch) {
+  // Use GitHub’s reported default branch; fall back to "main"
+  const branch = defaultBranch || "main";
+
+  const candidates = [
+    "icon.png", "icon.jpg", "icon.webp",
+    "logo.png", "logo.jpg", "logo.webp",
+    "thumbnail.png", "thumb.png",
+    "assets/icon.png", "assets/logo.png",
+    "docs/icon.png", "docs/logo.png"
+  ];
+
+  for (const path of candidates) {
+    const raw = `https://raw.githubusercontent.com/${owner}/${repoName}/${branch}/${path}`;
+    const ok = await imageExists(raw);
+    if (ok) return raw;
+  }
+  return null;
+}
+
+  function imageExists(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.referrerPolicy = "no-referrer";
+      img.src = url;
+    });
+  }
+
+  // ---------- Bubble rendering ----------
+  function initialsFor(name) {
+    const parts = String(name).split(/[-_\s]+/).filter(Boolean);
+    const a = parts[0]?.[0] ?? "R";
+    const b = parts[1]?.[0] ?? parts[0]?.[1] ?? "";
+    return (a + b).toUpperCase();
+  }
+
+function createBubble(repo) {
+  const el = document.createElement("div");
+  el.className = "bubble";
+  el.setAttribute("role", "button");
+  el.setAttribute("tabindex", "0");
+  el.dataset.url = repo.html_url;
+
+  // internal flags used with drag
+  el._suppressNextClick = false; // set by drag logic
+  el._dragMoved = false;         // set by drag logic
+
+  const icon = document.createElement("div");
+  icon.className = "icon";
+
+  const text = document.createElement("div");
+  text.className = "text";
+
+  const name = document.createElement("div");
+  name.className = "name";
+  name.textContent = repo.name;
+
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  const lang = repo.language ? repo.language : "—";
+  meta.textContent = `${lang} • ★ ${repo.stargazers_count}`;
+
+  text.appendChild(name);
+  text.appendChild(meta);
+
+  // fallback initials
+  const init = document.createElement("div");
+  init.className = "initials";
+  init.textContent = initialsFor(repo.name);
+  icon.appendChild(init);
+
+  el.appendChild(icon);
+  el.appendChild(text);
+
+  const open = () => {
+    window.open(repo.html_url, "_blank", "noopener");
+  };
+
+  // blocks a click that immediately follows a drag
+  el.addEventListener("click", (e) => {
+    if (el._suppressNextClick) {
+      el._suppressNextClick = false;   // consume the suppression
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    open();
+  });
+
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      open();
+    }
+  });
+
+  stage.appendChild(el);
+
+  return { el, repo, icon };
+}
+
+  // ---------- Simple physics cluster layout ----------
+  // runs a lightweight force simulation so bubbles float but stay clustered.
+  const nodes = [];
+  let animId = null;
+  let w = 0, h = 0;
+
+  function resize() {
+    w = stage.clientWidth;
+    h = stage.clientHeight;
+  }
+  window.addEventListener("resize", resize, { passive: true });
+
+  function randAroundCenter(spread=160) {
+    const cx = w * 0.5, cy = h * 0.52;
+    return {
+      x: cx + (Math.random()*2-1) * spread,
+      y: cy + (Math.random()*2-1) * spread
+    };
+  }
+
+  function startSim() {
+    cancelAnimationFrame(animId);
+    const center = () => ({ x: w*0.5, y: h*0.52 });
+
+    function step() {
+      const c = center();
+      for (const n of nodes) {
+        // gentle pull to center
+        const dx = c.x - n.x;
+        const dy = c.y - n.y;
+        n.vx += dx * 0.0009;
+        n.vy += dy * 0.0009;
+
+        // floating drift
+        n.vx += (Math.sin((performance.now()/1000) + n.seed) * 0.003);
+        n.vy += (Math.cos((performance.now()/1000) + n.seed) * 0.003);
+
+        // damping
+        n.vx *= 0.92;
+        n.vy *= 0.92;
+
+        // integrate
+        n.x += n.vx;
+        n.y += n.vy;
+
+        // bounds soft
+        const pad = 70;
+        n.x = Math.max(pad, Math.min(w - pad, n.x));
+        n.y = Math.max(90, Math.min(h - pad, n.y));
+      }
+
+      // collision basic
+      for (let i=0; i<nodes.length; i++) {
+        for (let j=i+1; j<nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const ax = a.x, ay = a.y, bx = b.x, by = b.y;
+          const dx = bx - ax, dy = by - ay;
+          const dist = Math.hypot(dx, dy) || 0.001;
+
+          const min = a.r + b.r;
+          if (dist < min) {
+            const overlap = (min - dist) / dist;
+            const ox = dx * overlap * 0.52;
+            const oy = dy * overlap * 0.52;
+            a.x -= ox; a.y -= oy;
+            b.x += ox; b.y += oy;
+            // small velocity kick
+            a.vx -= ox * 0.02; a.vy -= oy * 0.02;
+            b.vx += ox * 0.02; b.vy += oy * 0.02;
+          }
+        }
+      }
+
+      // render
+      for (const n of nodes) {
+        n.el.style.left = n.x + "px";
+        n.el.style.top  = n.y + "px";
+      }
+
+      animId = requestAnimationFrame(step);
+    }
+    animId = requestAnimationFrame(step);
+  }
+
+  // dragging
+  function enableDrag(node) {
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let startClientX = 0, startClientY = 0;
+
+  const THRESHOLD = 6; // pixels before I consider it a drag
+
+  const down = (e) => {
+    dragging = true;
+    node.el.style.transition = "none";
+    node.el.style.zIndex = "10";
+    node.vx = node.vy = 0;
+
+    const pt = getPoint(e);
+    startX = pt.x - node.x;
+    startY = pt.y - node.y;
+    startClientX = pt.x;
+    startClientY = pt.y;
+
+    node.el._dragMoved = false;
+
+    e.preventDefault();
+  };
+
+  const move = (e) => {
+    if (!dragging) return;
+    const pt = getPoint(e);
+    const dx = pt.x - startClientX;
+    const dy = pt.y - startClientY;
+
+    // if movement exceeds threshold, mark as a drag
+    if (!node.el._dragMoved && (dx*dx + dy*dy) > (THRESHOLD*THRESHOLD)) {
+      node.el._dragMoved = true;
+    }
+
+    node.x = pt.x - startX;
+    node.y = pt.y - startY;
+
+    e.preventDefault();
+  };
+
+  const up = () => {
+    if (!dragging) return;
+    dragging = false;
+    node.el.style.transition = "";
+    node.el.style.zIndex = "1";
+
+    if (node.el._dragMoved) {
+      // suppress the click that will fire next
+      node.el._suppressNextClick = true;
+    }
+  };
+
+  node.el.addEventListener("mousedown", down);
+  window.addEventListener("mousemove", move);
+  window.addEventListener("mouseup", up);
+
+  node.el.addEventListener("touchstart", down, { passive:false });
+  window.addEventListener("touchmove", move, { passive:false });
+  window.addEventListener("touchend", up);
+}
+
+  function getPoint(e) {
+    if (e.touches && e.touches[0]) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    return { x: e.clientX, y: e.clientY };
+  }
+
+  // ---------- Load and render ----------
+  async function main() {
+    resize();
+    statusEl.textContent = "Loading repos…";
+
+    const repos = await fetchAllRepos(USERNAME);
+
+    statusEl.textContent = `Loaded ${repos.length} repos. Building bubbles…`;
+
+    for (const repo of repos) {
+      const b = createBubble(repo);
+
+      // size rough collision radius based on rendered width
+      // temporarily position to measure
+      b.el.style.left = (w/2) + "px";
+      b.el.style.top  = (h/2) + "px";
+      const rect = b.el.getBoundingClientRect();
+      const r = Math.max(52, Math.min(120, rect.width * 0.42));
+
+      const p = randAroundCenter(220);
+      const node = {
+        el: b.el,
+        x: p.x,
+        y: p.y,
+        vx: (Math.random()*2-1) * 0.8,
+        vy: (Math.random()*2-1) * 0.8,
+        r,
+        seed: Math.random()*6.28
+      };
+      nodes.push(node);
+      enableDrag(node);
+
+    // Try icons
+        let iconSet = false;
+
+        // 1) common repo icon filenames which is preferred
+        const iconUrl = await tryCommonIcons(
+        USERNAME,
+        repo.name,
+        repo.default_branch
+        );
+
+        if (iconUrl) {
+        b.icon.innerHTML = `<img src="${iconUrl}" alt="">`;
+        iconSet = true;
+        }
+
+        // 2) social preview only if no custom icon found
+        if (!iconSet) {
+        const preview = socialPreviewURL(USERNAME, repo.name);
+        const previewOk = await imageExists(preview);
+        
+        if (previewOk) {
+            b.icon.innerHTML = `<img src="${preview}" alt="">`;
+            iconSet = true;
+        }
+        }
+
+    }
+
+    statusEl.textContent = "Done.";
+    setTimeout(() => statusEl.style.display = "none", 900);
+
+    startSim();
+  }
+
+  main().catch(err => {
+    console.error(err);
+    statusEl.textContent = "Failed to load repos. Check GitHub API availability.";
+  });
+})();
+</script>
+
+</body>
+</html>
